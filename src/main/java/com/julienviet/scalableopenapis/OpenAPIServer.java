@@ -1,4 +1,4 @@
-package com.julienviet.http2;
+package com.julienviet.scalableopenapis;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -11,14 +11,11 @@ import io.vertx.ext.web.api.RequestParameters;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.core.http.HttpServerOptions;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainVerticle extends AbstractVerticle {
+public class OpenAPIServer extends AbstractVerticle {
 
     public static void main(String[] args) {
         Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new MainVerticle());
+        vertx.deployVerticle(new OpenAPIServer());
     }
 
     private JsonArray users = new JsonArray()

@@ -1,0 +1,26 @@
+== Scalable Open APIs with Vert.x
+
+This projects demonstrates a small Open API application exposed as an HTTP/2 server with Vert.x
+
+Usage:
+
+----
+> mvn clean package
+> java -jar target/http2-1.0.0-SNAPSHOT-fat.jar
+----
+
+you can test it with curl:
+
+.List all users
+----
+> curl -k https://localhost:8443/users
+[{"firstName":"Julien","lastName":"Viet"},{"firstName":"Francesco","lastName":"Guardiani"}]
+----
+
+.Add a user
+----
+> curl -k -H "Content-Type: application/json" -X POST -d '{"firstName":"Dale","lastName":"cooper"}' https://localhost:8443/users
+2
+----
+
+You can check HTTP/2 works

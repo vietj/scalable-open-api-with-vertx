@@ -1,4 +1,4 @@
-package com.julienviet.http2;
+package com.julienviet.scalableopenapis;
 
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpVersion;
@@ -24,7 +24,7 @@ public class UsersAPITest {
     @Before
     public void before(TestContext ctx) {
         vertx = Vertx.vertx();
-        vertx.deployVerticle(new MainVerticle(), ctx.asyncAssertSuccess());
+        vertx.deployVerticle(new OpenAPIServer(), ctx.asyncAssertSuccess());
         client = WebClient.create(vertx, new WebClientOptions()
             .setSsl(true)
             .setTrustAll(true)
