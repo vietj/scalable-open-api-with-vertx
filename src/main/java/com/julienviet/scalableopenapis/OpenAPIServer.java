@@ -47,6 +47,8 @@ public class OpenAPIServer extends AbstractVerticle {
 
         // When you finish to map endpoints you can get the router with factory.getRouter()
         Router router = factory.getRouter();
+
+        // Start the HTTP/2 server with the OpenAPI router
         vertx.createHttpServer(new HttpServerOptions()
             .setSsl(true)
             .setUseAlpn(true)
@@ -63,8 +65,7 @@ public class OpenAPIServer extends AbstractVerticle {
   }
 
   private void listUsers(RoutingContext routingContext) {
-    RequestParameters params = routingContext.get("parsedParameters");
-    // Do what you want to retrieve the users with limit
+    // Returns the list of users encoded to a JSON array
     routingContext
         .response()
         .setStatusCode(200)
@@ -72,11 +73,20 @@ public class OpenAPIServer extends AbstractVerticle {
   }
 
   private void addUser(RoutingContext routingContext) {
+
+    // Get the parsed parameters
     RequestParameters params = routingContext.get("parsedParameters");
-    String userId = "" + users.size();
+
+    // We get an user JSON object validated by Vert.x Open API validator
     JsonObject user = params.body().getJsonObject();
+
+    // Generate a user id
+    String userId = "" + users.size();
+
+    // Add the user to the users list
     users.add(user);
-    // Do what you want to add user to your persistence layer
+
+    // Send the user id as JSON response
     routingContext
         .response()
         .setStatusCode(200)
