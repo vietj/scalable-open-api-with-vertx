@@ -1,52 +1,42 @@
+---
 openapi: 3.0.0
 info:
-  title: Test API
-  description: My test API
+  title: Users API
+  description: An API for managing users
   version: 1.0.0
 paths:
   /users:
     get:
-      summary: List all users
+      summary: All users
       operationId: listUsers
-      parameters:
-        - name: limit
-          in: query
-          required: false
-          schema:
-            type: integer
-            default: 100
+      description: List all users
       responses:
         200:
+          description: Returns the list of all users
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/UserWithId'
+                  $ref: '#/components/schemas/User'
     post:
-      summary: Add a new user
+      summary: Creates a user
       operationId: addUser
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
+        required: true
       responses:
         200:
+          description: A user was created succesfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserWithId'
+                type: string
 components:
   schemas:
-    UserWithId:
-      allOf:
-        - $ref: '#/components/schemas/User'
-        - properties:
-          id:
-            type: string
-          required:
-            - id
     User:
       required:
       - firstName
@@ -55,4 +45,3 @@ components:
           type: string
         lastName:
           type: string
-
